@@ -1,0 +1,52 @@
+QUERIES CON JOIN:
+
+1.  SELECT x.name, x.surname, y.name
+    FROM students as x
+    INNER JOIN degrees as y
+    ON y.id = x.degree_id 
+    WHERE y.name = 'Corso di Laurea in Economia';
+
+
+2.  SELECT x.name, y.name
+    FROM degrees AS x
+    INNER JOIN departments AS y
+    ON y.id = x.department_id
+    WHERE y.name = 'Dipartimento di Neuroscienze';
+
+
+3.  SELECT x.name,x.surname,x.id AS teacher_ID,y.course_id, courses.name
+    FROM teachers AS x
+    INNER JOIN course_teacher AS y ON x.id = y.teacher_id
+    INNER JOIN courses AS k ON y.course_id = k.id
+    WHERE x.name = 'Fulvio' AND x.surname = 'Amato';
+
+
+4. SELECT x.registration_number, x.surname, x.name, y.name AS Corso, y.address, k.name AS dipartimento, k.address
+   FROM students AS x
+   JOIN degrees AS y ON y.id = x.degree_id
+   JOIN departments AS k ON k.id = y.department_id
+   ORDER BY x.name ASC, x.surname ASC;
+
+
+5. SELECT x.name, y.name, y.year,CONCAT(z.name,' ', z.surname) AS Teacher, y.cfu
+   FROM degrees AS x
+   JOIN courses AS y ON x.id = y.degree_id
+   JOIN course_teacher AS k ON y.id = k.course_id
+   JOIN teachers AS z ON k.teacher_id = z.id;
+  
+
+6. SELECT DISTINCT x.surname, x.name, h.name AS Dipartimento
+   FROM teachers AS x
+   JOIN course_teacher AS y ON x.id = y.teacher_id
+   JOIN courses AS k ON  y.course_id = k.id
+   JOIN degrees AS z ON  k.degree_id = z.id 
+   JOIN departments AS h ON z.department_id = h.id
+   WHERE  h.name = 'Dipartimento di Matematica';
+
+
+7. SELECT CONCAT(x.name,' ', x.surname) AS Studente, z.name AS Corso, COUNT(y.vote) AS Tentativi
+   FROM students AS x
+   INNER JOIN exam_student AS y ON x.id = y.student_id
+   INNER JOIN exams AS k ON y.exam_id = k.id 
+   INNER JOIN courses AS z ON k.course_id = z.id 
+   GROUP BY x.id, z.id;
