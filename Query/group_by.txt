@@ -1,0 +1,18 @@
+QUERIES CON GROUP BY:
+
+
+1.  SELECT YEAR(enrolment_date) AS enrolment, COUNT(id) 
+    FROM students 
+    GROUP BY enrolment;
+
+2.  ELECT COUNT(id), office_address
+    FROM teachers 
+    GROUP BY office_address;
+
+3. SELECT AVG(vote),exam_id
+   FROM exam_student
+   GROUP BY exam_id;
+
+4. SELECT department_id AS dipartimento , COUNT(id) AS numero_corsi
+   FROM degrees
+   GROUP BY department_id;
